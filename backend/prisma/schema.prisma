@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  editor
+  author
+}
+
+enum ArticleStatus {
+  draft
+  published
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(author)
+  avatar       String    @default("")
+  active       Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  articles     Article[]
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  color     String    @default("#1e6bff")
+  createdAt DateTime  @default(now())
+  articles  Article[]
+  articleLinks ArticleCategory[]
+}
+
+model Article {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  excerpt       String        @default("")
+  content       String        @default("")
+  image         String        @default("")
+  tags          String[]
+  status        ArticleStatus @default(draft)
+  featured      Boolean       @default(false)
+  views         Int           @default(0)
+  notifiedAt    DateTime?
+  notifiedCount Int?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  categoryId    String
+  authorId      String
+  category      Category      @relation(fields: [categoryId], references: [id])
+  author        User          @relation(fields: [authorId], references: [id])
+  /// additional categories (the primary one is `categoryId`)
+  extraCategories ArticleCategory[]
+
+  @@index([status, createdAt])
+  @@index([categoryId])
+  @@index([authorId])
+}
+
+model ArticleCategory {
+  articleId  String
+  categoryId String
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([articleId, categoryId])
+  @@index([categoryId])
+}
+
+/// YouTube playlist shown on the home page
+model Video {
+  id        String   @id @default(cuid())
+  title     String
+  youtubeId String
+  duration  String   @default("")
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Subscriber {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  phone      String?
+  smsConsent Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+/// Single-row table (id = 1) with the site parametrization
+model Settings {
+  id              Int      @id @default(1)
+  siteName        String   @default("Thekinoloji")
+  tagline         String   @default("")
+  city            String   @default("")
+  temperature     String   @default("")
+  footerText      String   @default("")
+  newsletterTitle String   @default("")
+  newsletterText  String   @default("")
+  popularTags     String[]
+  facebook        String   @default("")
+  x               String   @default("")
+  instagram       String   @default("")
+  youtube         String   @default("")
+  whatsapp        String   @default("")
+  linkedin        String   @default("")
+  telegram        String   @default("")
+  /// networks shown in the share bar at the end of each article
+  shareNetworks   String[] @default(["facebook", "x", "whatsapp", "linkedin", "telegram"])
+  smsEnabled      Boolean  @default(true)
+  smsTemplate     String
+}

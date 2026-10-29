@@ -1,0 +1,10 @@
+# HTTPS automático (Let's Encrypt). O DNS de $DOMAIN tem de apontar para o IP do VPS.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy web:3000
+}
+
+# Opcional: redirecionar www → domínio principal
+www.{$DOMAIN} {
+	redir https://{$DOMAIN}{uri} permanent
+}
