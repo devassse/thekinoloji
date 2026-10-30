@@ -61,12 +61,14 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             </ul>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-1 border-t border-line px-4 py-4 text-center text-xs text-muted">
-          <div>© {new Date().getFullYear()} {st.siteName}. Todos os direitos reservados.</div>
-          <div>
-            Desenvolvido com <span className="text-red-500">♥</span> por{" "}
-            <a href="https://joaodevsonmucavel.vercel.app/" target="_blank" rel="noopener noreferrer"
-              className="font-bold transition-colors hover:text-brand">Keoma Software, Inc.</a>
+        <div className="border-t border-line">
+          <div className="mx-auto flex max-w-7xl flex-col items-center gap-1 px-4 py-4 text-center text-xs text-muted sm:flex-row sm:justify-between sm:gap-3">
+            <div>© {new Date().getFullYear()} {st.siteName}. Todos os direitos reservados.</div>
+            <div>
+              Desenvolvido com <span className="text-red-500">♥</span> por{" "}
+              <a href="https://joaodevsonmucavel.vercel.app/" target="_blank" rel="noopener noreferrer"
+                className="font-bold transition-colors hover:text-brand">Keoma Software, Inc.</a>
+            </div>
           </div>
         </div>
       </footer>
