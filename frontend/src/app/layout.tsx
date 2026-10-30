@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   icons: { icon: "/logo.png" },
 };
 
+// Aplica o tema guardado (ou o do sistema) antes da 1.ª pintura, para não piscar
+const themeScript = `(function(){try{var t=localStorage.getItem("tk-theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";var d=document.documentElement;d.dataset.theme=t;d.style.colorScheme=t}catch(e){}})()`;
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt" className={`${display.variable} ${body.variable}`}>

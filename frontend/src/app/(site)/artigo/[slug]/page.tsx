@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Img from "@/components/Img";
 import Newsletter from "@/components/site/Newsletter";
 import ShareBar from "@/components/site/ShareBar";
+import ViewTracker from "@/components/site/ViewTracker";
 import { Badge, Meta, RankRow, RowCard, SectionTitle } from "@/components/site/cards";
 import { api, ApiError } from "@/lib/api";
 import { clean, toHtml } from "@/lib/content";
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const a = await load(params.slug);
-  if (a.status === "published") await api.countView(a.slug).catch(() => {});
+  // if (a.status === "published") await api.countView(a.slug).catch(() => {});
 
   const [{ settings }, published] = await Promise.all([api.site(), api.published()]);
   const pub = published.filter((x) => x.id !== a.id);
@@ -41,6 +42,7 @@ export default async function ArticlePage({ params }: { params: { slug: string }
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
       <article className="min-w-0">
+        {a.status === "published" && <ViewTracker slug={a.slug} />}
         {a.status === "draft" && <p className="mb-4 rounded-lg bg-amber-400/15 px-4 py-2 text-sm text-amber-600 dark:text-amber-300">Pré-visualização de rascunho — não está público.</p>}
         <div className="flex flex-wrap gap-2">{a.categories.map((c) => <Badge key={c.id} c={c} />)}</div>
         <h1 className="mt-3 font-display text-3xl font-extrabold leading-tight text-ink md:text-4xl">{a.title}</h1>

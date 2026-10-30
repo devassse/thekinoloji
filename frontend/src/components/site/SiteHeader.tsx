@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, Search } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 type Cat = { id: string; name: string; slug: string };
 
@@ -54,12 +55,12 @@ export default function SiteHeader({ tagline, categories }: { tagline: string; c
 
   return (
     <header className={`sticky top-0 z-30 border-b transition-all duration-300 ${scrolled ? "border-line bg-surface/85 shadow-lg shadow-black/10 backdrop-blur-md" : "border-line bg-surface"}`}>
-      <div className={`mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-4 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
-        <Link href="/" className="flex items-center gap-3">
-          <img src="/logo.png" alt="" className={`rounded-full transition-all duration-300 ${scrolled ? "h-8 w-8" : "h-11 w-11"}`} />
+      <div className={`mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-2 px-4 max-[425px]:gap-x-2 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
+        <Link href="/" className="flex min-w-0 items-center gap-3 max-[425px]:gap-2">
+          <img src="/logo.png" alt="" className={`rounded-full transition-all duration-300 ${scrolled ? "h-8 w-8 max-[425px]:h-7 max-[425px]:w-7" : "h-11 w-11 max-[425px]:h-8 max-[425px]:w-8"}`} />
           <span className="leading-tight">
-            <span className={`block font-display font-bold text-ink transition-all duration-300 ${scrolled ? "text-lg" : "text-xl"}`}>Thekinoloji</span>
-            <span className={`block overflow-hidden text-[11px] text-muted transition-all duration-300 ${scrolled ? "max-h-0 opacity-0" : "max-h-4 opacity-100"}`}>{tagline}</span>
+            <span className={`block font-display font-bold text-ink transition-all duration-300 ${scrolled ? "text-lg max-[425px]:text-[15px]" : "text-xl max-[425px]:text-base"}`}>Thekinoloji</span>
+            <span className={`block overflow-hidden text-[11px] text-muted max-[425px]:text-[9px] transition-all duration-300 ${scrolled ? "max-h-0 opacity-0" : "max-h-4 max-[425px]:max-h-3 opacity-100"}`}>{tagline}</span>
           </span>
         </Link>
 
@@ -79,9 +80,10 @@ export default function SiteHeader({ tagline, categories }: { tagline: string; c
           </form>
         </div>
 
-        <div className={`ml-auto flex items-center gap-2 md:ml-0 ${mobileFull ? "" : "hidden sm:flex"}`}>
-          <a href="#newsletter" className={`rounded-lg bg-brand px-3 text-xs font-semibold text-white transition-all duration-300 hover:bg-brand-400 sm:px-4 sm:text-sm ${scrolled ? "py-1.5" : "py-2"}`}>Subscrever</a>
-        </div>
+        <div className={`ml-auto flex items-center gap-2 max-[425px]:gap-1.5 md:ml-0 ${mobileFull ? "" : "hidden sm:flex"}`}>
+     <a href="#newsletter" className={`rounded-lg bg-brand px-3 text-xs font-semibold text-white transition-all duration-300 hover:bg-brand-400 sm:px-4 sm:text-sm max-[425px]:px-2.5 max-[425px]:text-[11px] ${scrolled ? "py-1.5" : "py-2"}`}>Subscrever</a>
+     <ThemeToggle />
+   </div>
       </div>
 
       {/* Desktop: horizontal bar */}

@@ -7,7 +7,7 @@ import type { Role, User } from "./types";
 /** The API issues an 8h JWT; we keep it in an httpOnly cookie and forward it as a Bearer token. */
 export function setToken(token: string) {
   cookies().set(TOKEN_COOKIE, token, {
-    httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 8, secure: process.env.NODE_ENV === "production",
+    httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 8, secure: (process.env.SITE_URL || "").startsWith("https://"),
   });
 }
 export function clearToken() { cookies().delete(TOKEN_COOKIE); }

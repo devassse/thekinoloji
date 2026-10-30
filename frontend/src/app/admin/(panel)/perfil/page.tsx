@@ -2,6 +2,7 @@ import { requireUser } from "@/lib/auth";
 import { Notice, PageHeader, ROLE_LABEL } from "@/components/admin/ui";
 import ImageField from "@/components/admin/ImageField";
 import { saveProfile } from "@/app/admin/actions";
+import PasswordInput from "@/components/PasswordInput";
 
 export const metadata = { title: "O meu perfil" };
 
@@ -21,8 +22,8 @@ export default async function ProfilePage({ searchParams }: { searchParams: { er
           <h2 className="font-display text-base font-bold text-ink">Alterar palavra-passe</h2>
           <p className="text-sm text-slate-500">Deixe em branco para manter a actual.</p>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div><label className="label" htmlFor="currentPassword">Palavra-passe actual</label><input id="currentPassword" name="currentPassword" type="password" autoComplete="current-password" className="field" /></div>
-            <div><label className="label" htmlFor="newPassword">Nova palavra-passe</label><input id="newPassword" name="newPassword" type="password" minLength={6} autoComplete="new-password" className="field" /></div>
+            <div><label className="label" htmlFor="currentPassword">Palavra-passe actual</label><PasswordInput id="currentPassword" name="currentPassword" autoComplete="current-password" /></div>
+            <div><label className="label" htmlFor="newPassword">Nova palavra-passe</label><PasswordInput id="newPassword" name="newPassword" minLength={6} autoComplete="new-password" /></div>
           </div>
         </section>
         <button className="btn-primary">Guardar perfil</button>

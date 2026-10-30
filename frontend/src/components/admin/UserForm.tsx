@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { User } from "@/lib/types";
 import { saveUser } from "@/app/admin/actions";
 import ImageField from "./ImageField";
+import PasswordInput from "@/components/PasswordInput";
 
 export default function UserForm({ user }: { user?: User }) {
   return (
@@ -17,7 +18,8 @@ export default function UserForm({ user }: { user?: User }) {
             <option value="author">Autor — os seus artigos</option>
           </select></div>
         <div><label className="label" htmlFor="password">{user ? "Nova palavra-passe" : "Palavra-passe *"}</label>
-          <input id="password" name="password" type="password" minLength={6} autoComplete="new-password" placeholder={user ? "Deixe em branco para manter" : ""} className="field" /></div>
+          <PasswordInput id="password" name="password" minLength={6} autoComplete="new-password" placeholder={user ? "Deixe em branco para manter" : ""} />
+        </div>
       </div>
       <ImageField name="avatar" label="Foto" defaultValue={user?.avatar} round />
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="active" defaultChecked={user?.active ?? true} className="h-4 w-4 accent-brand" />Conta activa</label>

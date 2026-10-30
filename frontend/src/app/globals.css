@@ -2,21 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- Theme tokens: light by default, dark when the system prefers it ---- */
+/* ---- Theme tokens: tema definido por <html data-theme="light|dark"> (ver layout.tsx + ThemeToggle) ---- */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --c-page: 248 250 252; --c-surface: 255 255 255; --c-surface2: 241 245 249;
   --c-ink: 7 18 48; --c-body: 51 65 85; --c-muted: 100 116 139; --c-line: 226 232 240; --c-link: 30 107 255;
   --s-50: 248 250 252; --s-100: 241 245 249; --s-200: 226 232 240; --s-300: 203 213 225; --s-400: 148 163 184;
   --s-500: 100 116 139; --s-600: 71 85 105; --s-700: 51 65 85; --s-800: 30 41 59; --s-900: 15 23 42;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --c-page: 5 11 26; --c-surface: 10 22 50; --c-surface2: 15 31 68;
-    --c-ink: 255 255 255; --c-body: 203 213 225; --c-muted: 148 163 184; --c-line: 31 44 78; --c-link: 25 181 255;
-    --s-50: 15 31 68; --s-100: 5 11 26; --s-200: 31 44 78; --s-300: 52 68 106; --s-400: 110 125 158;
-    --s-500: 148 163 184; --s-600: 171 184 204; --s-700: 203 213 225; --s-800: 226 232 240; --s-900: 241 245 249;
-  }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --c-page: 5 11 26; --c-surface: 10 22 50; --c-surface2: 15 31 68;
+  --c-ink: 255 255 255; --c-body: 203 213 225; --c-muted: 148 163 184; --c-line: 31 44 78; --c-link: 25 181 255;
+  --s-50: 15 31 68; --s-100: 5 11 26; --s-200: 31 44 78; --s-300: 52 68 106; --s-400: 110 125 158;
+  --s-500: 148 163 184; --s-600: 171 184 204; --s-700: 203 213 225; --s-800: 226 232 240; --s-900: 241 245 249;
 }
 body { background: rgb(var(--c-page)); color: rgb(var(--c-body)); }
 
