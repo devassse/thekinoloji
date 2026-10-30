@@ -30,7 +30,7 @@ export default function VideoSection({ videos }: { videos: Video[] }) {
                 </span>
                 <span className="min-w-0">
                   <span className="line-clamp-2 text-[13px] font-semibold leading-snug text-ink">{v.title}</span>
-                  <span className="mt-1 block text-[11px] text-muted">{timeAgo(v.createdAt)}</span>
+                  <span suppressHydrationWarning className="mt-1 block text-[11px] text-muted">{timeAgo(v.createdAt)}</span>
                 </span>
               </button>
             </li>
@@ -51,7 +51,7 @@ export default function VideoSection({ videos }: { videos: Video[] }) {
             <span className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-navy-900 shadow-xl transition-transform group-hover:scale-110"><Play size={28} className="ml-1" fill="currentColor" /></span>
             <span className="absolute inset-x-0 bottom-0 p-5">
               <span className="block font-display text-xl font-bold leading-tight text-white md:text-2xl">{main.title}</span>
-              <span className="mt-1 block text-xs text-white/75">{timeAgo(main.createdAt)}{main.duration && ` · ${main.duration}`}</span>
+              <span suppressHydrationWarning className="mt-1 block text-xs text-white/75">{timeAgo(main.createdAt)}{main.duration && ` · ${main.duration}`}</span>
             </span>
           </button>
         )}

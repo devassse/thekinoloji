@@ -1,40 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-
-type Theme = "light" | "dark";
-const KEY = "tk-theme";
-
-const apply = (t: Theme) => {
-  document.documentElement.dataset.theme = t;
-  document.documentElement.style.colorScheme = t;
-};
-const saved = (): Theme | null => {
-  try { const v = localStorage.getItem(KEY); return v === "light" || v === "dark" ? v : null; } catch { return null; }
-};
+import { applyTheme, currentTheme, saveTheme, watchSystemTheme, type Theme } from "@/lib/theme";
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null); // null até montar (evita diferenças SSR/cliente)
 
   useEffect(() => {
-    setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
-    // Enquanto o visitante não escolher, acompanha o tema do sistema em tempo real
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = (e: MediaQueryListEvent) => {
-      if (saved()) return;
-      const t: Theme = e.matches ? "dark" : "light";
-      apply(t);
-      setTheme(t);
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    const t = currentTheme();
+    applyTheme(t); setTheme(t);
+    return watchSystemTheme(setTheme);
   }, []);
 
   const toggle = () => {
     const next: Theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    apply(next);
-    try { localStorage.setItem(KEY, next); } catch {}
-    setTheme(next);
+    applyTheme(next); saveTheme(next); setTheme(next);
   };
 
   const label = theme === "dark" ? "Mudar para modo claro" : "Mudar para modo escuro";

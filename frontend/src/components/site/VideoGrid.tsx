@@ -27,7 +27,7 @@ export default function VideoGrid({ videos }: { videos: Video[] }) {
           </div>
           <div className="space-y-1 p-3">
             <h2 className="line-clamp-2 text-sm font-semibold leading-snug text-ink">{v.title}</h2>
-            <p className="text-[11px] text-muted">{timeAgo(v.createdAt)}</p>
+            <p suppressHydrationWarning className="text-[11px] text-muted">{timeAgo(v.createdAt)}</p>
           </div>
         </li>
       ))}

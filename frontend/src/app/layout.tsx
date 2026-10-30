@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import ThemeSync from "@/components/ThemeSync";
 import "./globals.css";
 
 const body = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-body" });
@@ -16,7 +17,7 @@ const themeScript = `(function(){try{var t=localStorage.getItem("tk-theme");if(t
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt" className={`${body.variable}`}>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans"><ThemeSync />{children}</body>
     </html>
   );
 }
