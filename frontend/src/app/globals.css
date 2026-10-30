@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-display: Arial, Helvetica, sans-serif;
+}
 /* ---- Theme tokens: tema definido por <html data-theme="light|dark"> (ver layout.tsx + ThemeToggle) ---- */
 :root {
   color-scheme: light;
