@@ -21,11 +21,11 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             {/* <span className="inline-flex items-center gap-1"><Sun size={12} className="text-amber-500" />{st.city} {st.temperature}</span> */}
           </div>
           <div className="flex flex-wrap gap-2">
-              {socials.map((n) => (
-                <a key={n} href={isRealUrl(st.socials[n]) ? st.socials[n] : undefined} aria-label={NETWORK_META[n].label} target="_blank" rel="noopener noreferrer"
-                  className="grid h-6 w-6 place-items-center cursor-pointer rounded-full bg-surface2 text-body hover:bg-brand hover:text-white"><SocialIcon network={n} size={10} /></a>
-              ))}
-            </div>
+            {socials.map((n) => (
+              <a key={n} href={isRealUrl(st.socials[n]) ? st.socials[n] : undefined} aria-label={NETWORK_META[n].label} target="_blank" rel="noopener noreferrer"
+                className="grid h-6 w-6 place-items-center cursor-pointer rounded-full bg-surface2 text-body hover:bg-brand hover:text-white"><SocialIcon network={n} size={10} /></a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -61,8 +61,22 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             </ul>
           </div>
         </div>
-        <div className="border-t border-line py-4 text-center text-xs text-muted">
-          © {new Date().getFullYear()} {st.siteName}. Todos os direitos reservados.
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t border-line py-4 text-center text-xs text-muted">
+          <div>
+            © {new Date().getFullYear()} {st.siteName}. Todos os direitos reservados.
+          </div>
+
+          <div>
+            Desenvolvido com <span className="text-red-500">♥</span> por{" "}
+            <a
+              href="https://joaodevsonmucavel.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold hover:text-primary transition-colors"
+            >
+              Keoma Software, Inc.
+            </a>
+          </div>
         </div>
       </footer>
     </div>
